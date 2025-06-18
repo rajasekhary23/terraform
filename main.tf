@@ -10,14 +10,23 @@ module "s3_buckets" {
     bucket2 = {
       bucket_name = "my-bucket-002"
       force_dstr = true
+      tags = {
+        
+      }
     }
     bucket3 = {
       bucket_name = "my-bucket-003"
       force_dstr = false
+      tags = {
+        
+      }
     }
     bucket4 = {
       bucket_name = "my-bucket-004"
       force_dstr = true
+      tags = {
+        
+      }
     }
   }
 
