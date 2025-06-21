@@ -9,6 +9,7 @@ variable "bucket_name" {
 
 variable "force_dstr" {
   type = bool
+  default = false
 }
 
 resource "aws_s3_bucket" "this" {
