@@ -38,7 +38,7 @@ install_packages() {
 main() {
     detect_pkg_manager
     echo "[+] Using package manager: $PKG_MGR"
-    install_packages curl git unzip python3 python3-pip
+    install_packages --allowerasing curl git unzip python3 python3-pip
     echo "set-1 Setup completed installing - curl git unzip python3 python3-pip"
     curl -sSf https://just.systems/install.sh | bash -s -- --to /usr/local/bin
     /usr/local/bin --version
