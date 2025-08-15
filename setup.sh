@@ -43,7 +43,7 @@ main() {
     # ignore if package in path already exists
     curl -sSf https://just.systems/install.sh | bash -s -- --to /usr/local/bin || echo "Skipping install — already exists"
     /usr/local/bin/just --version
-    just --version
+    #just --version
     which just
     echo "Setting alias for python & pip 3"
     alias python=python3
