@@ -1,5 +1,5 @@
 # Set Python venv directory
-VENV_DIR := .venv
+VENV_DIR :=".venv"
 
 # Default target
 default:
