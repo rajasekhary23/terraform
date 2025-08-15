@@ -40,7 +40,7 @@ main() {
     echo "[+] Using package manager: $PKG_MGR"
     install_packages --allowerasing curl git unzip python3 python3-pip
     echo "set-1 Setup completed installing - curl git unzip python3 python3-pip"
-    curl -sSf https://just.systems/install.sh | bash -s -- --to /usr/local/bin
+    curl -sSf https://just.systems/install.sh | bash -s -- --to /usr/local/bin || echo "Skipping install — already exists"
     /usr/local/bin/just --version
     just --version
     which just
