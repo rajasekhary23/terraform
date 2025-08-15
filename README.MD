@@ -9,4 +9,4 @@ To setup the tool/packages required use ${\color{green}setup.sh \space}$ by prov
 chmod +x setup.sh & bash setup.sh
 ```
 
-Curently we are not using just  to ${\color{red} just \space file}$ setup environment.
+Curently we are not using ${\color{red} just \space file}$ to setup environment.
