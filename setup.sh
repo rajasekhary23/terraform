@@ -1,6 +1,40 @@
 #!/usr/bin/env bash
+# setup.sh - Cross-distro setup script
+# Works on Amazon Linux, Ubuntu/Debian, CentOS/RHEL, Fedora, and Alpine
+# Ensure LF line endings only: run `dos2unix setup.sh` if needed
 
-set -e
+set -euo pipefail
+
+# Detect OS and Package Manager
+detect_pkg_manager() {
+    if command -v apt-get >/dev/null 2>&1; then
+        PKG_MGR="apt-get"
+        UPDATE_CMD="apt-get update -y"
+        INSTALL_CMD="apt-get install -y"
+    elif command -v yum >/dev/null 2>&1; then
+        PKG_MGR="yum"
+        UPDATE_CMD="yum update -y"
+        INSTALL_CMD="yum install -y"
+    elif command -v dnf >/dev/null 2>&1; then
+        PKG_MGR="dnf"
+        UPDATE_CMD="dnf update -y"
+        INSTALL_CMD="dnf install -y"
+    elif command -v apk >/dev/null 2>&1; then
+        PKG_MGR="apk"
+        UPDATE_CMD="apk update"
+        INSTALL_CMD="apk add --no-cache"
+    else
+        echo "❌ No supported package manager found. Exiting."
+        exit 1
+    fi
+}
+
+# Install packages
+install_packages() {
+    echo "📦 Installing required packages..."
+    sudo $UPDATE_CMD
+    sudo $INSTALL_CMD "$@"
+}
 
 GREEN="\033[0;32m"
 YELLOW="\033[1;33m"
@@ -12,11 +46,13 @@ OS_TYPE="$(uname -s | tr '[:upper:]' '[:lower:]')"
 install_linux() {
     echo -e "${GREEN}[+] Installing prerequisites for Linux${NC}"
     sudo apt update || true
-    sudo apt install -y curl unzip git shellcheck
+    install_packages curl unzip git shellcheck
 
     curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sudo sh
     curl -s https://raw.githubusercontent.com/aquasecurity/tfsec/master/scripts/install_linux.sh | bash
     curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash
+
+    echo "✅ Setup complete on $(uname -a)"
 }
 
 install_macos() {
