@@ -74,7 +74,7 @@ main() {
     echo -e "${GREEN}[+] Creating Git pre-commit hook...${NC}"
 
     HOOK_PATH=".git/hooks/pre-commit"
-    cat > "$HOOK_PATH" << 'EOF'
+    cat > "$HOOK_PATH" << EOF
     #!/usr/bin/env bash
     set -e
 
@@ -104,6 +104,7 @@ main() {
 
     echo "[✓] All checks passed!"
     EOF
+
 
     chmod +x "$HOOK_PATH"
     echo -e "${GREEN}[+] Pre-commit hook installed successfully!${NC}"
